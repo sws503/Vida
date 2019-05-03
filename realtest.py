@@ -67,10 +67,12 @@ def main():
         pin_temp = 2
         pin_distance = 3
         pin_light = 4
+	pin_grove = 8
 
         sensor = Adafruit_DHT.DHT11
         GPIO.setmode(GPIO.BCM)
         GPIO.setup(pin_distance, GPIO.IN)
+	GPIO.setup(pin_grove, GPIO.IN)
         #humidity, temperature = Adafruit_DHT.read_retry(sensor, pin_temp)
         human = 0
         fl = 0
@@ -81,6 +83,7 @@ def main():
             else:
                 print ("Failed to get reading.")
             print("distance " + str(GPIO.input(pin_distance)))
+	    print("grove " + str(GPIO.input(pin_grove)))
             print("light " + str(rc_time(pin_light)))
             
             human += int(GPIO.input(pin_distance) == 0)
@@ -88,7 +91,7 @@ def main():
             
             if(human >= 3):
                 while(True):
-                    print("유진님 집에 돌아오셨네용 오늘 하루는 어떠셨어요?")
+                    print("안녕 집에 돌아오셨네용 오늘 하루는 어떠셨어요?")
                     #time = 10
                     try:
                         alarm(10)
