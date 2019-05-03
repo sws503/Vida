@@ -16,6 +16,9 @@ import ex6_queryVoice as dss
 import time
 import datetime
 
+HOST = 'gate.gigagenie.ai'
+PORT = 4080
+
 debug_mode = 1
 
 def initial_func():
@@ -26,15 +29,16 @@ def initial_func():
 
 
 def text_talk():
-    inputstr = input("나무에게 하고싶은 말을 적으세요:")
-    queryByText(inputstr)
+    input_str = input("나무에게 하고싶은 말을 적으세요:")
+    answer_str = qt.return_answer(input_str)
+    print("응답 : "+answer_str)
     tts_result = tts.getText2VoiceStream(answer_str, "result_msg1.wav")
     if tts_result == 500:
         print("TTS 동작에러입니다.")
-        break
+        return 0
     else :
         MS.play_file("result_msg1.wav")
-    time.sleep(2)
+    #time.sleep(2)
 
 
 def main():
@@ -42,11 +46,11 @@ def main():
     if (debug_mode == 0):
         initial_func()
 
-    KWSID = ['기가지니','나무']
     while 1:
         print('while문 진입')
         
-        text_talk()
+        if (True) : #일상대화 시작하는 조건
+            text_talk()
 
 
 if __name__ == '__main__':
